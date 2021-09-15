@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p>Введите название картинки и добавте точки</p>
+<div>
+    <input type="text" placeholder="Название"/>
+</div>
+
+
+<dialog>
+    <p>Введите координаты точки:</p>
+    <input type="number" step="0.01" placeholder="x" id="x"/>
+    <input type="number" step="0.01" placeholder="y" id="y"/>
+    <button id="close">Добавить</button>
+</dialog>
+<button id="show">Добавить точку</button>
+
+
+<script type=text/javascript>
+    let dialog = document.querySelector('dialog');
+    document.querySelector('#show').onclick = function () {
+        dialog.show();
+    };
+    document.querySelector('#close').onclick = function () {
+        add();
+        dialog.close();
+    };
+
+    function send(postData) {
+        const options = {
+            hostname: 'http://127.0.0.1:8000',
+            path: '/items',
+            method: 'POST'
+        };
+        http = new XMLHttpRequest();
+        const req = http.request(options, (res) => {
+            console.log(`STATUS: ${res.statusCode}`);
+        });
+        req.write(postData);
+        req.end();
+    }
+
+    function add() {
+        let x = document.querySelector('#x').value;
+        let y = document.querySelector('#y').value;
+        let postData = {
+            name: "name",
+            x: parseFloat(x),
+            y: parseFloat(y)
+        };
+        send(postData);
+    }
+</script>
+
+<div>
+    <button> Нарисовать</button>
+</div>
+
+
+</body>
+</html>

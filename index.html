@@ -31,18 +31,20 @@
         dialog.close();
     };
 
-    function send(postData) {
-        const options = {
-            hostname: 'http://127.0.0.1:8000',
-            path: '/items',
-            method: 'POST'
-        };
-        http = new XMLHttpRequest();
-        const req = http.request(options, (res) => {
-            console.log(`STATUS: ${res.statusCode}`);
-        });
-        req.write(postData);
-        req.end();
+    async function send(postData) {
+        try {
+            const response = await fetch('http://127.0.0.1:8000/items', {
+                method: 'POST',
+                body: JSON.stringify(postData),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const json = await response.json();
+            console.log('Успех:', JSON.stringify(json));
+        } catch (error) {
+            console.error('Ошибка:', error);
+        }
     }
 
     function add() {

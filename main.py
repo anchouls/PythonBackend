@@ -36,9 +36,6 @@ class ItemIn(BaseModel):
 async def create_item(item: ItemIn):
     if item.x == 0 and item.y == 0:
         raise HTTPException(status_code=400, detail="Invalid request")
-    return math.sqrt(item.x * item.x + item.y * item.y)
+    return math.sqrt(item.x ** 2 + item.y ** 2)
 
 
-@app.post("/")
-async def create_item(item: int = 0):
-    return {"id": item}

@@ -6,19 +6,34 @@
 </head>
 <body>
 
-<p>Введите название картинки и добавте точки</p>
+<p>Введите название картинки и добавте точки и палочки</p>
 <div>
     <input id="name" type="text" placeholder="Название"/>
 </div>
 
 
-<dialog>
+<dialog id="dialog_point">
     <p>Введите координаты точки:</p>
     <input type="number" step="0.01" placeholder="x" id="x"/>
     <input type="number" step="0.01" placeholder="y" id="y"/>
     <button id="close">Добавить</button>
 </dialog>
-<button id="show">Добавить точку</button>
+<dialog id="dialog_line">
+    <p>Введите координаты палки:</p>
+    <div>
+        <input type="number" step="0.01" placeholder="x" id="x1"/>
+        <input type="number" step="0.01" placeholder="y" id="y1"/>
+    </div>
+    <div>
+        <input type="number" step="0.01" placeholder="x" id="x2"/>
+        <input type="number" step="0.01" placeholder="y" id="y2"/>
+    </div>
+    <button id="close_dialog">Добавить</button>
+</dialog>
+<div>
+    <button id="show">Добавить точку</button>
+    <button id="line">Добавить палку</button>
+</div>
 
 <div>
     <button id="draw"> Нарисовать</button>
@@ -28,18 +43,27 @@
 
 
 <script type=text/javascript>
-    let dialog = document.querySelector('dialog');
+    let dialog = document.querySelector('#dialog_point');
     document.querySelector('#show').onclick = function () {
         dialog.show();
     };
     document.querySelector('#close').onclick = function () {
-        add();
+        add_point();
         dialog.close();
     };
 
-    async function send(postData) {
+    let dialog_line = document.querySelector('#dialog_line');
+    document.querySelector('#line').onclick = function () {
+        dialog_line.show();
+    };
+    document.querySelector('#close_dialog').onclick = function () {
+        add_line();
+        dialog_line.close();
+    };
+
+    async function send(postData, type) {
         try {
-            const response = await fetch('http://127.0.0.1:8000/items', {
+            const response = await fetch('http://127.0.0.1:8000/add/' + type, {
                 method: 'POST',
                 body: JSON.stringify(postData),
                 headers: {
@@ -53,16 +77,32 @@
         }
     }
 
-    function add() {
+    function add_point() {
         let x = document.querySelector('#x').value;
         let y = document.querySelector('#y').value;
-        let name  = document.querySelector('#name').value;
+        let name = document.querySelector('#name').value;
         let postData = {
             name: name,
             x: parseFloat(x),
             y: parseFloat(y)
         };
-        send(postData);
+        send(postData, 'point');
+    }
+
+    function add_line() {
+        let x1 = document.querySelector('#x1').value;
+        let y1 = document.querySelector('#y1').value;
+        let x2 = document.querySelector('#x2').value;
+        let y2 = document.querySelector('#y2').value;
+        let name = document.querySelector('#name').value;
+        let postData = {
+            name: name,
+            x1: parseFloat(x1),
+            y1: parseFloat(y1),
+            x2: parseFloat(x2),
+            y2: parseFloat(y2)
+        };
+        send(postData, 'line');
     }
 
     document.querySelector('#draw').onclick = function () {
@@ -70,13 +110,20 @@
     };
 
     function draw() {
-        fetch('http://127.0.0.1:8000/draw/' + document.querySelector('#name').value)
-            .then(response => response.blob())
+        fetch('http://127.0.0.1:8000/draw/?name=' + document.querySelector('#name').value)
+            .then(response => {
+                if (response.status !== 200) {
+                    alert("Invalid name");
+                    return null;
+                }
+                return response.blob();
+            })
             .then(imageBlob => {
-                const imageObjectURL = URL.createObjectURL(imageBlob);
-                console.log(imageObjectURL);
-                document.querySelector('#img').src = imageObjectURL;
-
+                if (imageBlob !== null) {
+                    const imageObjectURL = URL.createObjectURL(imageBlob);
+                    console.log(imageObjectURL);
+                    document.querySelector('#img').src = imageObjectURL;
+                }
             });
     }
 </script>

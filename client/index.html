@@ -8,7 +8,7 @@
 
 <p>Введите название картинки и добавте точки</p>
 <div>
-    <input type="text" placeholder="Название"/>
+    <input id="name" type="text" placeholder="Название"/>
 </div>
 
 
@@ -19,6 +19,12 @@
     <button id="close">Добавить</button>
 </dialog>
 <button id="show">Добавить точку</button>
+
+<div>
+    <button id="draw"> Нарисовать</button>
+</div>
+
+<img id="img" src="" height="600" width="600"/>
 
 
 <script type=text/javascript>
@@ -50,18 +56,30 @@
     function add() {
         let x = document.querySelector('#x').value;
         let y = document.querySelector('#y').value;
+        let name  = document.querySelector('#name').value;
         let postData = {
-            name: "name",
+            name: name,
             x: parseFloat(x),
             y: parseFloat(y)
         };
         send(postData);
     }
-</script>
 
-<div>
-    <button> Нарисовать</button>
-</div>
+    document.querySelector('#draw').onclick = function () {
+        draw();
+    };
+
+    function draw() {
+        fetch('http://127.0.0.1:8000/draw/' + document.querySelector('#name').value)
+            .then(response => response.blob())
+            .then(imageBlob => {
+                const imageObjectURL = URL.createObjectURL(imageBlob);
+                console.log(imageObjectURL);
+                document.querySelector('#img').src = imageObjectURL;
+
+            });
+    }
+</script>
 
 
 </body>

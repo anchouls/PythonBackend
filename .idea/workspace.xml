@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="465de205-aaa6-448c-a689-2a62e43041ea" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/contracts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/data_processing.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/entity.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_integration.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_integration.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_unit.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_unit.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -144,7 +151,7 @@
       <workItem from="1631647119496" duration="1516000" />
       <workItem from="1631703941892" duration="20871000" />
       <workItem from="1631735859984" duration="6458000" />
-      <workItem from="1631791951537" duration="247000" />
+      <workItem from="1631791951537" duration="4178000" />
     </task>
     <servers />
   </component>
@@ -169,7 +176,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/tests/test_integration.py</url>
-          <line>59</line>
+          <line>22</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>

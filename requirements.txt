@@ -1,0 +1,6 @@
+pytest
+pydantic
+matplotlib
+starlette
+fastapi
+aiofiles

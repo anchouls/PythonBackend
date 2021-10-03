@@ -4,8 +4,8 @@ from starlette.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from starlette.responses import RedirectResponse
 from starlette.staticfiles import StaticFiles
-from app.data_processing import Data_processing
-from app.contracts import Point, Line
+from .data_processing import Data_processing
+from .contracts import Point, Line
 
 app = FastAPI()
 

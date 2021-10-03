@@ -3,8 +3,8 @@ from os import path
 
 from fastapi import HTTPException
 
-from app.data_processing import Data_processing
-from app.entity import Point, Line
+from ..app.data_processing import Data_processing
+from ..app.entity import Point, Line
 
 
 def test_add_items_and_check_create_file():

@@ -1,8 +1,8 @@
 import pytest
 from os import path
 
-from app.data_processing import Data_processing
-from app.entity import Point, Line
+from ..app.data_processing import Data_processing
+from ..app.entity import Point, Line
 
 
 def test_check_name_not_fall():

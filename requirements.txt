@@ -1,3 +1,4 @@
+graphene
 locust
 pytest
 pydantic

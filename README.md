@@ -38,3 +38,11 @@ GraphQL:
     }
   }
 }
+```
+[Схема микросервисов и инструкция по расширению микросервисов](Diagram.drawio.png)
+
+Запустить сервес rendering: `project.servers.rendering.main:app --reload`
+
+Запустить сервес user: `project.servers.user.main:app --reload --port 8002`
+
+Запустить сервес working_with_image: `project.servers.working_with_image.main:app --reload --port 8001`

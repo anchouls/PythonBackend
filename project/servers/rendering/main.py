@@ -5,7 +5,7 @@ from fastapi.responses import FileResponse
 from starlette.responses import RedirectResponse
 from starlette.staticfiles import StaticFiles
 from .data_processing import Data_processing
-from .contracts import Point, Line
+from project.servers.contracts import Point, Line, User
 
 app = FastAPI()
 
@@ -19,7 +19,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/client", StaticFiles(directory="client"), name="client")
+app.mount("/client", StaticFiles(directory="project/client"), name="client")
 
 
 @app.get("/")
@@ -33,18 +33,22 @@ def get_id(item_id: int = 0):
 
 
 @app.post("/add/point")
-async def add_point(item: Point):
-    data_processing.add_item(item, 'point')
+async def add_point(item: Point, user: User):
+    data_processing.add_item(item, user, 'point')
 
 
 @app.post("/add/line")
-async def add_line(item: Line):
-    data_processing.add_item(item, 'line')
+async def add_line(item: Line, user: User):
+    data_processing.add_item(item, user, 'line')
 
 
 @app.get("/draw")
-def draw(name: str = ""):
-    data_processing.check_name(name)
-    return FileResponse(data_processing.draw_figure(name))
+def draw(user: User):
+    return FileResponse(data_processing.draw_figure(user))
+
+
+@app.get("/get_image")
+def get_image(name: str):
+    return data_processing.get_image_by_name(name)
 
 

@@ -37,6 +37,12 @@
 
 <div>
     <button id="draw"> Нарисовать</button>
+    <button id="save"> Опубликовать</button>
+</div>
+
+<div>
+    <button id="sign"> Войти</button>
+    <button id="finding"> Поиск</button>
 </div>
 
 <img id="img" src="" height="600" width="600"/>
@@ -126,6 +132,23 @@
                 }
             });
     }
+
+    document.querySelector('#save').onclick = async function () {
+        try {
+            const response = await fetch('http://127.0.0.1:8001/add_image', {
+                method: 'POST',
+                body: JSON.stringify(document.querySelector('#name').value),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            const json = await response.json();
+            console.log('Успех:', JSON.stringify(json));
+        } catch (error) {
+            console.error('Ошибка:', error);
+        }
+    };
+
 </script>
 
 

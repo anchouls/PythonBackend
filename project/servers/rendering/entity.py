@@ -1,6 +1,5 @@
 
 class Point:
-    name: str
     x: float
     y: float
 
@@ -14,7 +13,6 @@ class Point:
 
 
 class Line:
-    name: str
     x1: float
     y1: float
     x2: float

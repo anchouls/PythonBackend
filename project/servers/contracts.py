@@ -2,7 +2,6 @@ from pydantic import BaseModel
 
 
 class Point(BaseModel):
-    name: str
     x: float
     y: float
 
@@ -11,7 +10,6 @@ class Point(BaseModel):
 
 
 class Line(BaseModel):
-    name: str
     x1: float
     y1: float
     x2: float
@@ -20,3 +18,7 @@ class Line(BaseModel):
     def get(self):
         return self.x1, self.x2, self.y1, self.y2
 
+
+class User(BaseModel):
+    name: str
+    password: str

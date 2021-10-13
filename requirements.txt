@@ -9,3 +9,4 @@ aiofiles
 uvicorn
 
 requests~=2.25.1
+SQLAlchemy~=1.4.25

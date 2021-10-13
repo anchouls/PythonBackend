@@ -1,7 +1,7 @@
 import pytest
 from os import path
 
-from project.servers.rendering import Data_processing
+from project.servers.rendering.data_processing import Data_processing
 from project.servers.rendering.entity import Point, Line
 
 

@@ -33,7 +33,7 @@ def get_id(item_id: int = 0):
 
 
 @app.post("/add/point")
-async def add_point(item: Point, user: User):
+def add_point(item: Point, user: User):
     data_processing.add_item(item, user, 'point')
 
 

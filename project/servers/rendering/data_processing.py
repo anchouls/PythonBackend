@@ -16,10 +16,14 @@ class Data_processing:
 
     @staticmethod
     def check_name(user):
+        headers = {
+            'accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
         response = requests.post("http://127.0.0.1:8002/check_user",
-                                 data={'user': {'name': user.name, 'password': user.password}})
-        if not response.json():
-            raise HTTPException(status_code=401, detail="Invalid name or password")
+                                 json={"name": user.name, "password": user.password})
+        if response.status_code != 200:
+            raise HTTPException(status_code=401, detail="Invalid name or password: "+response.text)
 
     def add_item(self, item, user, item_type):
         self.check_name(user)
@@ -40,5 +44,6 @@ class Data_processing:
         return file_path
 
     def get_image_by_name(self, name):
+        print(self.d)
         return self.d[name]
 

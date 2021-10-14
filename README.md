@@ -49,5 +49,13 @@ GraphQL:
 
 [Сравнение СУБД](СравнениеСУБД.pages)
 
+##Алгоритм развертывания: 
+
+1. Скачайте MySQL
+2. Запустите MySQL Workbench 
+3. CREATE DATABASE mybd
+4. Впишите свои данные в `project/servers/database/database.py`
+`create_engine("mysql+pymysql://имя_тут:пароль_тут@localhost:порт_тут/mybd")`
+   
 Запустить тесты базы данных:
-`C:/Users/HYPERPC/AppData/Local/Programs/Python/Python39/python.exe -m pytest project/tests/test_database.py`
+`python -m pytest project/tests/test_database.py`
